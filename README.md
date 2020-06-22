@@ -10,7 +10,7 @@ I will attempt to show Roger's genius represented by data.
 
 ### Wireframes 
 
-
+![](images/Homepage.png)
 
 ### Architecture/Technology
 
