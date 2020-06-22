@@ -14,11 +14,15 @@ I will attempt to show Roger's genius represented by data.
 
 ### Architecture/Technology
 
+* HTML/CSS
+* Javascript
+* Webpack
 * D3
+
 
 ### Implementation Timeline 
 
 * D1: Research d3 and gather data points
-* D2: MVP 1
-* D3: MVP 2,3
+* D2: Get first graph up
+* D3: Bar chart animation
 * D4: Bugs, and get project production-ready.
