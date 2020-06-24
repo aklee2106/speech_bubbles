@@ -3,6 +3,9 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 		<title>Speech Bubbles</title>
+		<link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/src/styles/index.css" />
 		
 		<script src="https://d3js.org/d3.v4.min.js"></script>
@@ -13,13 +16,25 @@
   
   <body>
 		
-		
+		<h1>speech bubbles</h1>
 		<svg class="main-container" id="circles-container"></svg>
 
-		
-		<input class="user-input" type="text" onSubmit>
-		<button id="submit">Submit</button>
-
+		<form>
+			<input class="user-input" type="text" placeholder="four score and twenty years ago">
+			<button id="submit">bubble!</button>
+			<button id="clear">clear</button>
+		</form>
 	</body>
+
+	<!-- <footer className="splash-footer">
+		<span>an alex lee joint  <i class="fas fa-crow"></i></span>
+		<ul class='footer-links'>
+			<li><a href="https://www.github.com/aklee2106"><i class="fab fa-github"></i></a></li>
+			<li><a href="https://www.linkedin.com/in/aklee2106"><i class="fab fa-linkedin"></i></a></li>
+			<li><a href="https://angel.co/u/alexander-k-lee"><i classd="fab fa-angellist"></i></a></li>
+		</ul>
+	</footer> -->
+
+
 </html>
 

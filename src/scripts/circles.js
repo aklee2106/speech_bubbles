@@ -2,15 +2,23 @@ document.addEventListener('DOMContentLoaded', ()=> {
 
   const submitButton = document.getElementById('submit');
   const userInput = document.querySelector('.user-input');
+  const clearButton = document.getElementById('clear');
   const mainContainer = document.querySelector('.main-container');
+
+  clearButton.addEventListener("click", (e)=> {
+    e.preventDefault();
+    
+     //clears all circles
+     while (mainContainer.firstChild) {
+      mainContainer.removeChild(mainContainer.firstChild);
+     };
+     
+     userInput.value = "";
+  })
+
 
   submitButton.addEventListener('click', (e)=>{
     e.preventDefault();
-    
-    //clears all circles
-    while (mainContainer.firstChild) {
-      mainContainer.removeChild(mainContainer.firstChild);
-    };
     
     //iterate through the string that user inputs
     let words = userInput.value.split(" ");
@@ -49,7 +57,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
         // debugger
       })
 			.catch(err => {
-				console.log(err);
+				console.log(`${word} is not a word!`);
 			});
     });
   })
@@ -95,15 +103,17 @@ function renderCircles(frequencies) {
       // debugger
       return colors[i % 7]; 
     })
-    // .attr("fill", "#8b008b")
     .attr('fill-opacity', .7)
     .on('click', function(d){
       console.log(d.word)
     })
-    .text(function(d){
-      return d.word
+    .on('mouseover', function(d) {
+      console.log(d.word)
     })
-
+    .on("mouseout", function(d) {
+      console.log(`mouseout: ${d.word}`)
+  });
 
   }
 
+  
