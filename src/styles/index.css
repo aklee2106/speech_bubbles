@@ -19,7 +19,7 @@ body {
 }
 
 input[type=text] {
-  width: 130px;
+  width: 300px;
   box-sizing: border-box;
   border: 2px solid #ccc;
   border-radius: 4px;
@@ -33,7 +33,7 @@ input[type=text] {
 }
 
 input[type=text]:focus {
-  width: 80%;
+  width: 60%;
   max-width: 650px;
 }
 
@@ -54,8 +54,6 @@ button {
   background-color: #6d6875;
   width: 82px;
 }
-
-
 
 
 /* footer styling */

@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', ()=> {
 
   const submitButton = document.getElementById('submit');
+  const submitForm = document.getElementById('submit-form');
   const userInput = document.querySelector('.user-input');
   const clearButton = document.getElementById('clear');
   const mainContainer = document.querySelector('.main-container');
@@ -17,15 +18,22 @@ document.addEventListener('DOMContentLoaded', ()=> {
   })
 
 
-  submitButton.addEventListener('click', (e)=>{
+  submitForm.addEventListener('submit', (e)=>{
     e.preventDefault();
     
     //iterate through the string that user inputs
     let words = userInput.value.split(" ");
+
+    //remove punctuation
+    const regex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g;
+    function removePunctuation(word) {
+      return word.replace(regex, '') 
+    }  
+
     let frequencies = [];
 
     words.forEach(word => {
-      
+      word = removePunctuation(word);
       //API call
       fetch(`https://wordsapiv1.p.rapidapi.com/words/${word}/frequency`, {
 				"method": "GET",
@@ -62,9 +70,6 @@ document.addEventListener('DOMContentLoaded', ()=> {
     });
   })
 
-  //So now we have circles on the screen. We want to animate now. 
-
-
 
 
   // hover over circles and see what word it represents
@@ -87,15 +92,21 @@ function renderCircles(frequencies) {
   const colors = ["#F94144", "#F3722C", "#F8961E", "#F9C74F", "#90BE6D", "#43AA8B", "#577590"];
 
   // debugger
+
+  const elemEnter = elem.enter()
+    .append("g")
+
   const circles = circlesContainer.selectAll('circle')
     .data(frequencies)
     .enter()
     .append('circle')
     .attr('cx', function(d,i){
-      return i* 100 + 300
+      return 500+ i * 100  
     })
-    .attr('cy', 500)
-    .attr("r", function(d){
+    .attr('cy', function(d,i){
+      return 500 + i * 100
+    })
+    .attr("r", function(d,i){
       return radiusScale(d.frequency);
     })
     .attr('fill', function(d, i) {
@@ -108,12 +119,21 @@ function renderCircles(frequencies) {
       console.log(d.word)
     })
     .on('mouseover', function(d) {
-      console.log(d.word)
+      return tooltip
+        .text(d.word)
+        .style('visibility', 'visible')
     })
-    .on("mouseout", function(d) {
-      console.log(`mouseout: ${d.word}`)
-  });
+    // .on("mouseout", function() {
+    //   return tooltip.style('visibility', "hidden")
+  // });
 
-  }
-
+  const tooltip = d3.select('circle')
+    .data(frequencies)
+    .append("div")
+    .style("position", "absolute")
+    .style("z-index", "10")
+    .style("visibility", "hidden")
+    .text("hello world");
   
+}
+
