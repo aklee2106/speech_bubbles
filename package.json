@@ -1,0 +1,45 @@
+{
+  "name": "goat",
+  "version": "1.0.0",
+  "description": "Roger Federer is the GOAT. Any true tennis fan knows this. I will attempt to show Roger's genius represented by data.",
+  "main": "index.js",
+  "dependencies": {
+    "autoprefixer": "^9.8.2",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^3.6.0",
+    "file-loader": "^6.0.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "node-sass": "^4.14.1",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^8.0.2",
+    "sass": "^1.26.8",
+    "style-loader": "^1.2.1",
+    "url-loader": "^4.1.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^4.2.2",
+    "webpack": "^4.43.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aklee2106/goat.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aklee2106/goat/issues"
+  },
+  "homepage": "https://github.com/aklee2106/goat#readme", 
+  "browserslist": [
+    "last 1 version",
+    "> 1%",
+    "maintained node versions",
+    "not dead"
+],
+  "scripts": {
+      "start": "webpack-dev-server --config webpack.dev.js",
+      "webpack:watch": "webpack --watch --config webpack.dev.js",
+      "webpack:build": "webpack --config webpack.prod.js  --optimize-minimize"
+  } 
+}
