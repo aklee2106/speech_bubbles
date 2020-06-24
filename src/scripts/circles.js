@@ -72,7 +72,11 @@ function renderCircles(frequencies) {
 
   // const xRange = d3.scale.linear().range([100,800]).domain([0,100])
   // const yRange = d3.scale.linear().range([100,800]).domain([0,100])
-  const colors = ['red', 'blue', 'green', 'yellow','purple', 'pink','orange','violet','white'];
+  
+  //pastel
+  // const colors = ["#FFADAD", "#FFD6A5", "#FDFFB6", "#CAFFBF", "#9BF6FF", "#A0C4FF", "#BDB2FF", "#FFC6FF", "#FFFFFC"];
+
+  const colors = ["#F94144", "#F3722C", "#F8961E", "#F9C74F", "#90BE6D", "#43AA8B", "#577590"];
 
   // debugger
   const circles = circlesContainer.selectAll('circle')
@@ -86,25 +90,20 @@ function renderCircles(frequencies) {
     .attr("r", function(d){
       return radiusScale(d.frequency);
     })
-    .attr('fill', function(d) {
+    .attr('fill', function(d, i) {
       let index = Math.floor(Math.random() * colors.length);
       // debugger
-      return colors[index]; 
+      return colors[i % 7]; 
     })
     // .attr("fill", "#8b008b")
-    .attr('fill-opacity', .5)
+    .attr('fill-opacity', .7)
     .on('click', function(d){
       console.log(d.word)
+    })
+    .text(function(d){
+      return d.word
     })
 
 
   }
-
-// function showInfo(){
-//   e.preventDefault();
-//   e.Target.word
-// }
-
-
-
 

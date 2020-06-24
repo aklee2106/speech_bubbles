@@ -9,7 +9,7 @@ body {
 }
 
 .main-container {
-  background-color: aliceblue;
+  background-color: #faf3dd;
   width: 1000px;
   height: 1000px;
   transform: translate(100,100);
