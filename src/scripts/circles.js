@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', ()=> {
   const userInput = document.querySelector('.user-input');
   const clearButton = document.getElementById('clear');
   const mainContainer = document.querySelector('.main-container');
+  const tooltip = d3.select('#word-preview')
+  const fakeWords = [];
 
   clearButton.addEventListener("click", (e)=> {
     e.preventDefault();
@@ -65,9 +67,14 @@ document.addEventListener('DOMContentLoaded', ()=> {
         // debugger
       })
 			.catch(err => {
-				console.log(`${word} is not a word!`);
+        console.log(err);
+        console.log(`${word} is not a word!`);
+        fakeWords.push(`${word} is not a word!`);
 			});
     });
+
+    tooltip.text("hover over bubbles!")
+    
   })
 
 
@@ -82,10 +89,7 @@ function renderCircles(frequencies) {
   // debugger
   const circlesContainer = d3.select("#circles-container");
   const radiusScale = d3.scaleSqrt().domain([1, 32000]).range([5,100]);
-
-  // const xRange = d3.scale.linear().range([100,800]).domain([0,100])
-  // const yRange = d3.scale.linear().range([100,800]).domain([0,100])
-  
+  const tooltip = d3.select('#word-preview')
   //pastel
   // const colors = ["#FFADAD", "#FFD6A5", "#FDFFB6", "#CAFFBF", "#9BF6FF", "#A0C4FF", "#BDB2FF", "#FFC6FF", "#FFFFFC"];
 
@@ -93,19 +97,17 @@ function renderCircles(frequencies) {
 
   // debugger
 
-  const elemEnter = elem.enter()
-    .append("g")
-
-  const circles = circlesContainer.selectAll('circle')
+  const circles = circlesContainer.selectAll('.node')
     .data(frequencies)
     .enter()
     .append('circle')
-    .attr('cx', function(d,i){
-      return 500+ i * 100  
-    })
-    .attr('cy', function(d,i){
-      return 500 + i * 100
-    })
+    .attr('class', 'node')
+    // .attr('cx', function(d,i){
+    //   return 500
+    // })
+    // .attr('cy', function(d,i){
+    //   return 500
+    // })
     .attr("r", function(d,i){
       return radiusScale(d.frequency);
     })
@@ -123,17 +125,58 @@ function renderCircles(frequencies) {
         .text(d.word)
         .style('visibility', 'visible')
     })
-    // .on("mouseout", function() {
-    //   return tooltip.style('visibility', "hidden")
-  // });
+    .on("mouseout", function() {
+      setTimeout(()=>{
+        return tooltip.text("")
+      }, 5000)
+  });
+  
+  // d3.queue()
+  // .defer()
+  //   .await(ready)
+  // debugger
 
-  const tooltip = d3.select('circle')
-    .data(frequencies)
-    .append("div")
-    .style("position", "absolute")
-    .style("z-index", "10")
-    .style("visibility", "hidden")
-    .text("hello world");
+  const simulation = d3.forceSimulation()
+    .force('x', d3.forceX(600).strength(.25))
+    .force('y', d3.forceY(600).strength(.25))
+    // .force('charge', d3.forceManyBody().strength(30))
+
+    simulation.nodes(frequencies)
+      .on('tick', ticked)
+      
+    function ticked() {
+      circles
+      .attr('cx', function(d) {
+        // debugger
+        return d.frequency
+      })
+      .attr('cy', function(d) {
+        // debugger
+        return d.frequency
+      })
+    // var u = d3.select('svg')
+    //   .selectAll('circle')
+    //   .data(frequencies)
+  
+    // u.enter()
+    //   .append('circle')
+    //   .attr('r', function(d){
+    //     10
+    //   })
+    //   .merge(u)
+    //   .attr('cx', function(d) {
+    //     return d.x
+    //   })
+    //   .attr('cy', function(d) {
+    //     return d.y
+    //   })
+      
+    // u.exit().remove()
+
+    
+
+
+}
   
 }
 

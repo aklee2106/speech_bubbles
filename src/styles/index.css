@@ -56,6 +56,14 @@ button {
 }
 
 
+#word-preview{
+  height: 40px;  
+  width: 100px;
+  margin: auto;
+}
+
+
+
 /* footer styling */
 .splash-footer {
   background-color: #f3f5f8;
