@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
   const speechButton = document.getElementById('speech');
   const mainContainer = document.querySelector('.main-container');
   const tooltip = d3.select('#word-preview')
-  const fakeWords = [];
+  // const fakeWords = [];
 
   clearButton.addEventListener("click", (e)=> {
     e.preventDefault();
@@ -31,18 +31,24 @@ document.addEventListener('DOMContentLoaded', ()=> {
     e.preventDefault();
     
     //iterate through the string that user inputs
-    let words = userInput.value.split(" ");
+    let words = userInput.value;
+    let frequencies = [];
 
     //remove punctuation
     const regex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g;
-    function removePunctuation(word) {
-      return word.replace(regex, '') 
+    function removePunctuation(string) {
+      return string.replace(regex, '') 
     }  
 
-    let frequencies = [];
+    //remove duplicates
+    words = removePunctuation(words).toLowerCase().split(" ");
+    words = words.filter((word,idx)=>{
+      return words.indexOf(word) === idx
+    });
+
 
     words.forEach(word => {
-      word = removePunctuation(word);
+
       //API call
       fetch(`https://wordsapiv1.p.rapidapi.com/words/${word}/frequency`, {
 				"method": "GET",
@@ -77,7 +83,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
 			.catch(err => {
         console.log(err);
         console.log(`${word} is not a word!`);
-        fakeWords.push(`${word} is not a word!`);
+        // fakeWords.push(`${word} is not a word!`);
 			});
     });
 
