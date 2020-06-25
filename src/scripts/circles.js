@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
   const submitForm = document.getElementById('submit-form');
   const userInput = document.querySelector('.user-input');
   const clearButton = document.getElementById('clear');
+  const speechButton = document.getElementById('speech');
   const mainContainer = document.querySelector('.main-container');
   const tooltip = d3.select('#word-preview')
   const fakeWords = [];
@@ -15,8 +16,14 @@ document.addEventListener('DOMContentLoaded', ()=> {
      while (mainContainer.firstChild) {
       mainContainer.removeChild(mainContainer.firstChild);
      };
-     
+
      userInput.value = "";
+  })
+
+  speechButton.addEventListener('click', (e)=> {
+    e.preventDefault();
+    let idx = Math.floor(Math.random() * 3);
+    userInput.value = speeches[idx];
   })
 
 
@@ -114,7 +121,7 @@ function renderCircles(frequencies) {
         return d.radius
       })
       .attr('fill', function(d, i) {
-        let index = Math.floor(Math.random() * colors.length);
+        // let index = Math.floor(Math.random() * colors.length);
         return colors[i % 7]; 
       })
       .attr('fill-opacity', .7)

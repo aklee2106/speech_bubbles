@@ -7,6 +7,7 @@ body {
   text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
   cursor: default;
   color: #6d6875;
+  /* background-image: linear-gradient(to top, gray, white); */
 }
 
 body > h1 {
@@ -43,7 +44,8 @@ input[type=text]:focus {
 }
 
 button {
-  background-color: #e5989b;
+  background-color: #ffb4a2;
+  /* background-color: #e5989b; */
   border: none;
   color: white;
   padding: 14px;
@@ -60,6 +62,10 @@ button {
   width: 82px;
 }
 
+#speech {
+  /* background-color: #ffb4a2; */
+  background-color: #e5989b;
+}
 
 #word-preview{
   height: 40px;  
