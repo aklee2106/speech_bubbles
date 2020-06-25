@@ -136,7 +136,7 @@ function renderCircles(frequencies) {
       .on("mouseout", function() {
         setTimeout(()=>{
           return tooltip.text("")
-        }, 5000)
+        }, 7000)
       })
       .merge(u)
       .attr('cx', function(d) {
