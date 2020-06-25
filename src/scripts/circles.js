@@ -87,47 +87,16 @@ function renderCircles(frequencies) {
   const tooltip = d3.select('#word-preview')
   const colors = ["#F94144", "#F3722C", "#F8961E", "#F9C74F", "#90BE6D", "#43AA8B", "#577590"];
 
-  // debugger
-
-  // const circles = circlesContainer.selectAll('.node')
-  //   .data(frequencies)
-  //   .enter()
-  //   .append('circle')
-  //   .attr('class', 'node')
-  //   .attr('cx', function(d,i){
-  //     return 500 + i
-  //   })
-  //   .attr('cy', function(d,i){
-  //     return 500
-  //   })
-  //   .attr("r", function(d,i){
-  //     return radiusScale(d.frequency);
-  //   })
-  //   .attr('fill', function(d, i) {
-  //     let index = Math.floor(Math.random() * colors.length);
-  //     return colors[i % 7]; 
-  //   })
-  //   .attr('fill-opacity', .7)
-  //   .on('click', function(d){
-  //     console.log(d.word)
-  //   })
-  //   .on('mouseover', function(d) {
-  //     return tooltip
-  //       .text(d.word)
-  //       .style('visibility', 'visible')
-  //   })
-  //   .on("mouseout", function() {
-  //     setTimeout(()=>{
-  //       return tooltip.text("")
-  //     }, 5000)
-  // });  
-  var numNodes = frequencies.length;
-  var nodes = d3.range(numNodes).map(function(d, i) {
-    return {radius: radiusScale(frequencies[i].frequency) }
+  const numNodes = frequencies.length;
+  const nodes = d3.range(numNodes).map(function(d, i) {
+    return {radius: radiusScale(frequencies[i].frequency),
+      word: frequencies[i].word 
+    }
   })
-  var simulation = d3.forceSimulation(nodes)
+
+  const simulation = d3.forceSimulation(nodes)
     .force('charge', d3.forceManyBody().strength(5))
-    .force('center', d3.forceCenter(500, 500))
+    .force('center', d3.forceCenter(500, 250))
     .force('collision', d3.forceCollide().radius(function(d) {
       return d.radius
     }))
@@ -135,7 +104,7 @@ function renderCircles(frequencies) {
 
   function ticked() {
     // debugger
-    var u = d3.select('svg')
+    const u = d3.select('svg')
     .selectAll('circle')
     .data(nodes)
 
@@ -152,16 +121,16 @@ function renderCircles(frequencies) {
       .on('click', function(d){
         console.log(d.word)
       })
-      // .on('mouseover', function(d) {
-      //   return tooltip
-      //     .text(d.word)
-      //     .style('visibility', 'visible')
-      // })
-      // .on("mouseout", function() {
-      //   setTimeout(()=>{
-      //     return tooltip.text("")
-      //   }, 5000)
-      // })
+      .on('mouseover', function(d) {
+        return tooltip
+          .text(d.word)
+          .style('visibility', 'visible')
+      })
+      .on("mouseout", function() {
+        setTimeout(()=>{
+          return tooltip.text("")
+        }, 5000)
+      })
       .merge(u)
       .attr('cx', function(d) {
         return d.x
@@ -171,27 +140,6 @@ function renderCircles(frequencies) {
       })
 
     u.exit().remove()
-  //   const circles = circlesContainer.selectAll('circle')
-  //     .data(frequencies)
-      
-  //     circles.enter()
-  //       .append('circle')
-  //       .attr('fill', function(d, i) {
-  //         let index = Math.floor(Math.random() * colors.length);
-  //         return colors[i % 7]; 
-  //       })
-  //       .attr('fill-opacity', .7)
-  //       .attr('r', function(d,i){
-  //         return radiusScale(d.frequency)
-  //       // .attr('cx', function(d,i){
-  //       //   return 500
-  //       // })
-  //       // .attr('cy', function(d,i){
-  //       //   return 500
-  //       // })
-  //     })
-
-  //     circles.exit().remove()
   }
   
 }
