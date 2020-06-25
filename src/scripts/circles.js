@@ -42,9 +42,10 @@ document.addEventListener('DOMContentLoaded', ()=> {
 				"headers": {
 					"x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
 					"x-rapidapi-key": "6138fd298emsh11aab9ec9165981p19347fjsna835530440b1"
-				}
+        }
       })
 			.then(response => {
+        // debugger
         return response.json();
       })
       .then(res => {
@@ -53,15 +54,15 @@ document.addEventListener('DOMContentLoaded', ()=> {
         obj["word"] = word;
         
         frequencies.push(obj);
-        // frequencies.push(res.frequency.perMillion);
+      
         return frequencies; 
         // debugger
       })
       .then(frequencies => {
         // debugger
+        
         //render circles here after gathering an array of radii lengths based on freq of word usage
         renderCircles(frequencies);
-        // debugger
         //reset radii lengths to blank
         frequencies = [];
         // debugger
@@ -77,12 +78,6 @@ document.addEventListener('DOMContentLoaded', ()=> {
     
   })
 
-
-
-  // hover over circles and see what word it represents
-  // const indivCircles = document.querySelector("circle");
-  // document.addEventListener('mouseover', showInfo(e));
-
 });
 
 function renderCircles(frequencies) {
@@ -90,93 +85,121 @@ function renderCircles(frequencies) {
   const circlesContainer = d3.select("#circles-container");
   const radiusScale = d3.scaleSqrt().domain([1, 32000]).range([5,100]);
   const tooltip = d3.select('#word-preview')
-  //pastel
-  // const colors = ["#FFADAD", "#FFD6A5", "#FDFFB6", "#CAFFBF", "#9BF6FF", "#A0C4FF", "#BDB2FF", "#FFC6FF", "#FFFFFC"];
-
   const colors = ["#F94144", "#F3722C", "#F8961E", "#F9C74F", "#90BE6D", "#43AA8B", "#577590"];
 
   // debugger
 
-  const circles = circlesContainer.selectAll('.node')
-    .data(frequencies)
-    .enter()
-    .append('circle')
-    .attr('class', 'node')
-    // .attr('cx', function(d,i){
-    //   return 500
-    // })
-    // .attr('cy', function(d,i){
-    //   return 500
-    // })
-    .attr("r", function(d,i){
-      return radiusScale(d.frequency);
-    })
-    .attr('fill', function(d, i) {
-      let index = Math.floor(Math.random() * colors.length);
-      // debugger
-      return colors[i % 7]; 
-    })
-    .attr('fill-opacity', .7)
-    .on('click', function(d){
-      console.log(d.word)
-    })
-    .on('mouseover', function(d) {
-      return tooltip
-        .text(d.word)
-        .style('visibility', 'visible')
-    })
-    .on("mouseout", function() {
-      setTimeout(()=>{
-        return tooltip.text("")
-      }, 5000)
-  });
-  
-  // d3.queue()
-  // .defer()
-  //   .await(ready)
-  // debugger
+  // const circles = circlesContainer.selectAll('.node')
+  //   .data(frequencies)
+  //   .enter()
+  //   .append('circle')
+  //   .attr('class', 'node')
+  //   .attr('cx', function(d,i){
+  //     return 500 + i
+  //   })
+  //   .attr('cy', function(d,i){
+  //     return 500
+  //   })
+  //   .attr("r", function(d,i){
+  //     return radiusScale(d.frequency);
+  //   })
+  //   .attr('fill', function(d, i) {
+  //     let index = Math.floor(Math.random() * colors.length);
+  //     return colors[i % 7]; 
+  //   })
+  //   .attr('fill-opacity', .7)
+  //   .on('click', function(d){
+  //     console.log(d.word)
+  //   })
+  //   .on('mouseover', function(d) {
+  //     return tooltip
+  //       .text(d.word)
+  //       .style('visibility', 'visible')
+  //   })
+  //   .on("mouseout", function() {
+  //     setTimeout(()=>{
+  //       return tooltip.text("")
+  //     }, 5000)
+  // });  
+  var numNodes = frequencies.length;
+  var nodes = d3.range(numNodes).map(function(d, i) {
+    return {radius: radiusScale(frequencies[i].frequency) }
+  })
+  var simulation = d3.forceSimulation(nodes)
+    .force('charge', d3.forceManyBody().strength(5))
+    .force('center', d3.forceCenter(500, 500))
+    .force('collision', d3.forceCollide().radius(function(d) {
+      return d.radius
+    }))
+    .on('tick', ticked)
 
-  const simulation = d3.forceSimulation()
-    .force('x', d3.forceX(600).strength(.25))
-    .force('y', d3.forceY(600).strength(.25))
-    // .force('charge', d3.forceManyBody().strength(30))
+  function ticked() {
+    // debugger
+    var u = d3.select('svg')
+    .selectAll('circle')
+    .data(nodes)
 
-    simulation.nodes(frequencies)
-      .on('tick', ticked)
-      
-    function ticked() {
-      circles
+    u.enter()
+      .append('circle')
+      .attr('r', function(d) {
+        return d.radius
+      })
+      .attr('fill', function(d, i) {
+        let index = Math.floor(Math.random() * colors.length);
+        return colors[i % 7]; 
+      })
+      .attr('fill-opacity', .7)
+      .on('click', function(d){
+        console.log(d.word)
+      })
+      // .on('mouseover', function(d) {
+      //   return tooltip
+      //     .text(d.word)
+      //     .style('visibility', 'visible')
+      // })
+      // .on("mouseout", function() {
+      //   setTimeout(()=>{
+      //     return tooltip.text("")
+      //   }, 5000)
+      // })
+      .merge(u)
       .attr('cx', function(d) {
-        // debugger
-        return d.frequency
+        return d.x
       })
       .attr('cy', function(d) {
-        // debugger
-        return d.frequency
+        return d.y
       })
-    // var u = d3.select('svg')
-    //   .selectAll('circle')
-    //   .data(frequencies)
-  
-    // u.enter()
-    //   .append('circle')
-    //   .attr('r', function(d){
-    //     10
-    //   })
-    //   .merge(u)
-    //   .attr('cx', function(d) {
-    //     return d.x
-    //   })
-    //   .attr('cy', function(d) {
-    //     return d.y
-    //   })
+
+    u.exit().remove()
+  //   const circles = circlesContainer.selectAll('circle')
+  //     .data(frequencies)
       
-    // u.exit().remove()
+  //     circles.enter()
+  //       .append('circle')
+  //       .attr('fill', function(d, i) {
+  //         let index = Math.floor(Math.random() * colors.length);
+  //         return colors[i % 7]; 
+  //       })
+  //       .attr('fill-opacity', .7)
+  //       .attr('r', function(d,i){
+  //         return radiusScale(d.frequency)
+  //       // .attr('cx', function(d,i){
+  //       //   return 500
+  //       // })
+  //       // .attr('cy', function(d,i){
+  //       //   return 500
+  //       // })
+  //     })
 
-    
-
-
-}
+  //     circles.exit().remove()
+  }
   
 }
+
+
+
+
+
+
+
 
