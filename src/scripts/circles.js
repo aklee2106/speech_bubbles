@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', ()=> {
 
   const submitButton = document.getElementById('submit');
-  // const submitForm = document.getElementById('submit-form');
+  const submitForm = document.getElementById('submit-form');
   const userInput = document.querySelector('.user-input');
   const clearButton = document.getElementById('clear');
   const speechButton = document.getElementById('speech');
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
   })
 
 
-  submitButton.addEventListener('click', (e)=>{
+  submitForm.addEventListener('submit', (e)=>{
     
     e.preventDefault();
     
