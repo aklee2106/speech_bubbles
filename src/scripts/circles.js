@@ -46,15 +46,14 @@ document.addEventListener('DOMContentLoaded', ()=> {
       return words.indexOf(word) === idx
     });
 
-
     words.forEach(word => {
-
+      
       //API call
       fetch(`https://wordsapiv1.p.rapidapi.com/words/${word}/frequency`, {
 				"method": "GET",
 				"headers": {
 					"x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
-					"x-rapidapi-key": "6138fd298emsh11aab9ec9165981p19347fjsna835530440b1"
+					"x-rapidapi-key": apiKey
         }
       })
 			.then(response => {

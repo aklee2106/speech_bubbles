@@ -55,6 +55,7 @@ button {
   border-radius: 7px;
   font-family: 'Quicksand', sans-serif;
   font-size: 16px;
+  width: 82px;
 }
 
 #clear {
