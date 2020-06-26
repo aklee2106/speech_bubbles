@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', ()=> {
   const speechButton = document.getElementById('speech');
   const mainContainer = document.querySelector('.main-container');
   const tooltip = d3.select('#word-preview')
-  // const fakeWords = [];
 
   const modal = document.querySelector('.modal');
   const xbutton = document.querySelector('.close');
@@ -97,7 +96,6 @@ document.addEventListener('DOMContentLoaded', ()=> {
 			.catch(err => {
         console.log(err);
         console.log(`${word} is not a word!`);
-        // fakeWords.push(`${word} is not a word!`);
 			});
     });
 
