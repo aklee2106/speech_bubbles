@@ -6,7 +6,7 @@ body {
   text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
   cursor: default;
   color: #6d6875;
-  /* background-image: linear-gradient(to top, gray, white); */
+  /* background-image: linear-gradient(to bottom, gray, white); */
 }
 
 body > h1 {
@@ -126,7 +126,7 @@ header {
   flex-direction: row;
   align-items: 0 8px;
   text-decoration: none;
-  font-size: 25px;
+  font-size: 32px;
   margin: 5px;
 }
 
