@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', ()=> {
 
   const submitButton = document.getElementById('submit');
-  const submitForm = document.getElementById('submit-form');
+  // const submitForm = document.getElementById('submit-form');
   const userInput = document.querySelector('.user-input');
   const clearButton = document.getElementById('clear');
   const speechButton = document.getElementById('speech');
@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
   // const fakeWords = [];
 
   clearButton.addEventListener("click", (e)=> {
+    
     e.preventDefault();
     
      //clears all circles
@@ -21,13 +22,15 @@ document.addEventListener('DOMContentLoaded', ()=> {
   })
 
   speechButton.addEventListener('click', (e)=> {
+    
     e.preventDefault();
     let idx = Math.floor(Math.random() * 3);
     userInput.value = speeches[idx];
   })
 
 
-  submitForm.addEventListener('submit', (e)=>{
+  submitButton.addEventListener('click', (e)=>{
+    
     e.preventDefault();
     
     //iterate through the string that user inputs
