@@ -9,6 +9,18 @@ document.addEventListener('DOMContentLoaded', ()=> {
   const tooltip = d3.select('#word-preview')
   // const fakeWords = [];
 
+  const modal = document.querySelector('.modal');
+  const xbutton = document.querySelector('.close');
+  
+  xbutton.addEventListener('click', (e) => {
+    modal.style.display = 'none';
+  });
+
+  window.addEventListener('click', (e)=>{
+    if (e.target === modal) modal.style.display = 'none';
+  });
+
+
   clearButton.addEventListener("click", (e)=> {
     
     e.preventDefault();
