@@ -1,28 +1,30 @@
+# Speech Bubbles 
+
+[Live Site](https://aklee2106.github.io/speech_bubbles/)
+
 ### Background and Overview
 
-Roger Federer is the GOAT. Any true tennis fan knows this.
-I will attempt to show Roger's genius represented by data.
+![](images/bubbles.gif)
+
+Speech Bubbles is an interactive data visualization application that takes a user input string of words and renders a bubble cluster representing the frequency of usage of the corresponding words. Bigger bubbles mean more common words. 
 
 ### Functionality and MVP
-* Data visualization showing key stats of Federer vs the average ATP player
-* Federer vs Nadal and/or Djokovic
-* Federer stats broken down by season/age (how does 23 year old Federer compare to 33 year old Federer?)
-
-### Wireframes 
-
-![](images/Homepage.png)
+* User inputs string of words and application renders bubble cluster
+* Application makes an API call for each word and fetches frequency
+* Prefill the input with a famous speech (ex) Gettsyburg Address)
 
 ### Architecture/Technology
 
-* HTML/CSS
-* Javascript
+* D3 library to render bubbles
+* WordsAPI to fetch frequency of word usage 
+* Vanilla Javascript
 * Webpack
-* D3
+* HTML/CSS
 
 
 ### Implementation Timeline 
 
-* D1: Research d3 and gather data points
-* D2: Get first graph up
-* D3: Bar chart animation
+* D1: Research D3 and configure API calls
+* D2: Render Bubble cluster chart
+* D3: D3 edits, styling 
 * D4: Bugs, and get project production-ready.

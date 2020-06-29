@@ -8,6 +8,12 @@
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="./src/styles/index.css" />
 		
+		<meta property="og:title" content="Speech Bubbles" />
+		<meta property="og:description" content="website" />
+		<meta property="og:url" content="https://alexklee.com/speech_bubbles/" />
+		<meta property="og:image" content="https://alexklee.com/speech_bubbles/images/bubbles.gif" />
+
+
 		<script src="https://d3js.org/d3.v4.min.js"></script>
 
 		<script src="./dist/main.js"></script>
@@ -15,31 +21,36 @@
 	</head>
   
   <body>
+		<header>
+			<span>an alex lee joint  <i class="fas fa-crow"></i></span>
+			<h1>speech bubbles</h1>
+			<ul class='header-links'>
+				<li><a href="https://www.github.com/aklee2106"><i class="fab fa-github"></i></a></li>
+				<li><a href="https://www.linkedin.com/in/aklee2106"><i class="fab fa-linkedin"></i></a></li>
+			</ul>
+		</header>
 		
-		<h1>speech bubbles</h1>
-
+		<div class='modal'>
+			<div class='modal-content'>
+				<span class='close'>&times;</span>
+				<p>Welcome to Speech Bubbles! Type up some words and you'll see bubbles representing
+					how frequently each word is used. Bigger bubbles mean more common words!
+				</p>
+			</div>
+		</div>
+		
 		<svg class="main-container" id="circles-container"></svg>
 
 		<div id="word-preview"></div>
 		
-		<!-- <form id="submit-form"> -->
-			<input class="user-input" type="text" placeholder="Four score and seven years ago...">
+		<form id="submit-form">
+			<input class="user-input" type="text" placeholder="type some words...">
 			<button id="submit">bubble!</button>
 			<button id="speech">speech</button>
 			<button id="clear">clear</button>
-		<!-- </form> -->
+		</form>
 		
 	</body>
-
-	<!-- <footer className="splash-footer">
-		<span>an alex lee joint  <i class="fas fa-crow"></i></span>
-		<ul class='footer-links'>
-			<li><a href="https://www.github.com/aklee2106"><i class="fab fa-github"></i></a></li>
-			<li><a href="https://www.linkedin.com/in/aklee2106"><i class="fab fa-linkedin"></i></a></li>
-			<li><a href="https://angel.co/u/alexander-k-lee"><i classd="fab fa-angellist"></i></a></li>
-		</ul>
-	</footer> -->
-
 
 </html>
 

@@ -1,13 +1,24 @@
 document.addEventListener('DOMContentLoaded', ()=> {
 
   const submitButton = document.getElementById('submit');
-  // const submitForm = document.getElementById('submit-form');
+  const submitForm = document.getElementById('submit-form');
   const userInput = document.querySelector('.user-input');
   const clearButton = document.getElementById('clear');
   const speechButton = document.getElementById('speech');
   const mainContainer = document.querySelector('.main-container');
   const tooltip = d3.select('#word-preview')
-  // const fakeWords = [];
+
+  const modal = document.querySelector('.modal');
+  const xbutton = document.querySelector('.close');
+  
+  xbutton.addEventListener('click', (e) => {
+    modal.style.display = 'none';
+  });
+
+  window.addEventListener('click', (e)=>{
+    if (e.target === modal) modal.style.display = 'none';
+  });
+
 
   clearButton.addEventListener("click", (e)=> {
     
@@ -29,7 +40,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
   })
 
 
-  submitButton.addEventListener('click', (e)=>{
+  submitForm.addEventListener('submit', (e)=>{
     
     e.preventDefault();
     
@@ -85,7 +96,6 @@ document.addEventListener('DOMContentLoaded', ()=> {
 			.catch(err => {
         console.log(err);
         console.log(`${word} is not a word!`);
-        // fakeWords.push(`${word} is not a word!`);
 			});
     });
 
