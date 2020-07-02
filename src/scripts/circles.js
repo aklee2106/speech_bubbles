@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
         }
       })
 			.then(response => {
-        // debugger
+        
         return response.json();
       })
       .then(res => {
@@ -82,20 +82,17 @@ document.addEventListener('DOMContentLoaded', ()=> {
         frequencies.push(obj);
       
         return frequencies; 
-        // debugger
+        
       })
       .then(frequencies => {
-        // debugger
         
         //render circles here after gathering an array of radii lengths based on freq of word usage
         renderCircles(frequencies);
         //reset radii lengths to blank
         frequencies = [];
-        // debugger
       })
 			.catch(err => {
         console.log(err);
-        console.log(`${word} is not a word!`);
 			});
     });
 
@@ -106,7 +103,7 @@ document.addEventListener('DOMContentLoaded', ()=> {
 });
 
 function renderCircles(frequencies) {
-  // debugger
+
   const circlesContainer = d3.select("#circles-container");
   const radiusScale = d3.scaleSqrt().domain([1, 32000]).range([5,100]);
   const tooltip = d3.select('#word-preview')
@@ -128,7 +125,7 @@ function renderCircles(frequencies) {
     .on('tick', ticked)
 
   function ticked() {
-    // debugger
+   
     const u = d3.select('svg')
     .selectAll('circle')
     .data(nodes)
@@ -139,7 +136,6 @@ function renderCircles(frequencies) {
         return d.radius
       })
       .attr('fill', function(d, i) {
-        // let index = Math.floor(Math.random() * colors.length);
         return colors[i % 7]; 
       })
       .attr('fill-opacity', .7)
