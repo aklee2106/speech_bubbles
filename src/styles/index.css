@@ -136,3 +136,6 @@ header {
   margin: 5px;
 }
 
+.fab:hover {
+  color: grey; 
+}
