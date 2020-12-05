@@ -24,7 +24,7 @@ Speech Bubbles is an interactive data visualization application that takes a use
 
 ### Implementation Timeline 
 
-* D1: Research D3 and configure API calls
-* D2: Render Bubble cluster chart
-* D3: D3 edits, styling 
-* D4: Bugs, and get project production-ready.
+* Day 1: Research D3 and configure API calls
+* Day 2: Render Bubble cluster chart
+* Day 3: D3 edits, styling 
+* Day 4: Bugs, and get project production-ready.
